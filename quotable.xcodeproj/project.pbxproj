@@ -15,6 +15,8 @@
 		5B17250E1A9E699900E97049 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5B17250C1A9E699900E97049 /* LaunchScreen.xib */; };
 		5B17251A1A9E699900E97049 /* quotableTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B1725191A9E699900E97049 /* quotableTests.m */; };
 		5B1725251A9E6AF100E97049 /* QuotesModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B1725241A9E6AF100E97049 /* QuotesModel.m */; };
+		5B4E0E181ABBCEFE00D2992F /* QuotesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B4E0E171ABBCEFE00D2992F /* QuotesTableViewController.m */; };
+		5B4E0E241ABBF6DA00D2992F /* InputViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B4E0E231ABBF6DA00D2992F /* InputViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,6 +45,10 @@
 		5B1725191A9E699900E97049 /* quotableTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = quotableTests.m; sourceTree = "<group>"; };
 		5B1725231A9E6AF100E97049 /* QuotesModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuotesModel.h; sourceTree = "<group>"; };
 		5B1725241A9E6AF100E97049 /* QuotesModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuotesModel.m; sourceTree = "<group>"; };
+		5B4E0E161ABBCEFE00D2992F /* QuotesTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuotesTableViewController.h; sourceTree = "<group>"; };
+		5B4E0E171ABBCEFE00D2992F /* QuotesTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuotesTableViewController.m; sourceTree = "<group>"; };
+		5B4E0E221ABBF6DA00D2992F /* InputViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InputViewController.h; sourceTree = "<group>"; };
+		5B4E0E231ABBF6DA00D2992F /* InputViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InputViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,6 +100,10 @@
 				5B17250A1A9E699900E97049 /* Images.xcassets */,
 				5B17250C1A9E699900E97049 /* LaunchScreen.xib */,
 				5B1724FD1A9E699900E97049 /* Supporting Files */,
+				5B4E0E161ABBCEFE00D2992F /* QuotesTableViewController.h */,
+				5B4E0E171ABBCEFE00D2992F /* QuotesTableViewController.m */,
+				5B4E0E221ABBF6DA00D2992F /* InputViewController.h */,
+				5B4E0E231ABBF6DA00D2992F /* InputViewController.m */,
 			);
 			path = quotable;
 			sourceTree = "<group>";
@@ -225,9 +235,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				5B1725061A9E699900E97049 /* ViewController.m in Sources */,
+				5B4E0E241ABBF6DA00D2992F /* InputViewController.m in Sources */,
 				5B1725031A9E699900E97049 /* AppDelegate.m in Sources */,
 				5B1725251A9E6AF100E97049 /* QuotesModel.m in Sources */,
 				5B1725001A9E699900E97049 /* main.m in Sources */,
+				5B4E0E181ABBCEFE00D2992F /* QuotesTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -418,6 +430,7 @@
 				5B17251F1A9E699900E97049 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		5B1725201A9E699900E97049 /* Build configuration list for PBXNativeTarget "quotableTests" */ = {
 			isa = XCConfigurationList;
@@ -426,6 +439,7 @@
 				5B1725221A9E699900E97049 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

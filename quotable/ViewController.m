@@ -18,7 +18,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.quotes = [[QuotesModel alloc] init];
+    self.quotes = [QuotesModel sharedModel];
     
     UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(singleTapRecognized:)];
     [self.view addGestureRecognizer:singleTap];

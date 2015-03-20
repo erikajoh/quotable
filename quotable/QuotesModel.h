@@ -13,6 +13,8 @@
 @property (strong, nonatomic) NSMutableArray *quotes;
 @property (nonatomic) NSUInteger currentIndex;
 
++ (instancetype) sharedModel;
+
 - (NSDictionary*)randomQuote;
 - (NSUInteger)numberOfQuotes;
 - (NSDictionary*)quoteAtIndex: (NSUInteger)index;
