@@ -23,6 +23,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.quotes = [QuotesModel sharedModel];
+    self.execBegin = false;
     
     UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(singleTapRecognized:)];
     singleTap.numberOfTapsRequired = 1;
@@ -72,6 +73,22 @@
 
 -(void)viewDidAppear:(BOOL)animated {
     [self becomeFirstResponder];
+    if (!self.execBegin) return;
+    if ( ! [self.quotes isFavorite:self.quoteLabel.text author:self.authorLabel.text] )
+        self.favoriteLabel.alpha = 0;
+    if ( ! [self.quotes isQuote:self.quoteLabel.text author:self.authorLabel.text] ) {
+        self.favoriteLabel.alpha = 0;
+        NSDictionary *quote = [self.quotes nextQuote];
+        if (!quote) {
+            self.quoteLabel.text = @"No quotes to show";
+            self.authorLabel.text = @":(";
+        } else {
+            self.quoteLabel.text = [quote valueForKey:@"quote"];
+            self.authorLabel.text = [quote valueForKey:@"author"];
+            if ( [self.quotes isFavorite:self.quoteLabel.text author:self.authorLabel.text] )
+                self.favoriteLabel.alpha = 1;
+        }
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -79,9 +96,11 @@
 }
 
 - (void)singleTapRecognized: (UITapGestureRecognizer *) recognizer {
+    self.execBegin = true;
     [_audioPlayer play];
     self.quoteLabel.alpha = 0;
     self.authorLabel.alpha = 0;
+    self.favoriteLabel.alpha = 0;
     NSDictionary *quote = [self.quotes randomQuote];
     if (!quote) {
         self.quoteLabel.text = @"No quotes to show";
@@ -89,6 +108,8 @@
     } else {
         self.quoteLabel.text = [quote valueForKey:@"quote"];
         self.authorLabel.text = [quote valueForKey:@"author"];
+        if ( [self.quotes isFavorite:self.quoteLabel.text author:self.authorLabel.text] )
+            [UIView animateWithDuration:1.0 animations:^{ self.favoriteLabel.alpha = 1; }];
     }
     [UIView animateWithDuration:1.0 animations:^{
         self.quoteLabel.alpha = 1;
@@ -97,14 +118,18 @@
 }
 
 - (void)doubleTapRecognized:(UITapGestureRecognizer *) recognizer {
-    NSUInteger favoriteIndex = [self.quotes indexOfQuote:self.quoteLabel.text author:self.authorLabel.text];
-    [self.quotes addFavorite:favoriteIndex];
+    if (!self.execBegin) return;
+    self.favoriteLabel.alpha = 0;
+    [self.quotes addFavorite:self.quoteLabel.text author:self.authorLabel.text];
+    [UIView animateWithDuration:1.0 animations:^{ self.favoriteLabel.alpha = 1; }];
 }
 
 - (void)swipeGestureRecognized: (UISwipeGestureRecognizer *) recognizer {
+    self.execBegin = true;
     [_audioPlayer play];
     self.quoteLabel.alpha = 0;
     self.authorLabel.alpha = 0;
+    self.favoriteLabel.alpha = 0;
     if (recognizer.direction == UISwipeGestureRecognizerDirectionLeft) {
         NSDictionary *quote = [self.quotes nextQuote];
         if (!quote) {
@@ -113,6 +138,8 @@
         } else {
             self.quoteLabel.text = [quote valueForKey:@"quote"];
             self.authorLabel.text = [quote valueForKey:@"author"];
+            if ( [self.quotes isFavorite:self.quoteLabel.text author:self.authorLabel.text] )
+                [UIView animateWithDuration:1.0 animations:^{ self.favoriteLabel.alpha = 1; }];
         }
     }
     if (recognizer.direction == UISwipeGestureRecognizerDirectionRight) {
@@ -123,6 +150,8 @@
         } else {
             self.quoteLabel.text = [quote valueForKey:@"quote"];
             self.authorLabel.text = [quote valueForKey:@"author"];
+            if ( [self.quotes isFavorite:self.quoteLabel.text author:self.authorLabel.text] )
+                [UIView animateWithDuration:1.0 animations:^{ self.favoriteLabel.alpha = 1; }];
         }
     }
     [UIView animateWithDuration:1.0 animations:^{
@@ -136,9 +165,11 @@
 }
 
 - (void)motionEnded: (UIEventSubtype) motion withEvent: (UIEvent*) event {
+    self.execBegin = true;
     [_audioPlayer play];
     self.quoteLabel.alpha = 0;
     self.authorLabel.alpha = 0;
+    self.favoriteLabel.alpha = 0;
     NSDictionary *quote = [self.quotes randomQuote];
     if (!quote) {
         self.quoteLabel.text = @"No quotes to show";
@@ -146,6 +177,8 @@
     } else {
         self.quoteLabel.text = [quote valueForKey:@"quote"];
         self.authorLabel.text = [quote valueForKey:@"author"];
+        if ( [self.quotes isFavorite:self.quoteLabel.text author:self.authorLabel.text] )
+            [UIView animateWithDuration:1.0 animations:^{ self.favoriteLabel.alpha = 1; }];
     }
     [UIView animateWithDuration:1.0 animations:^{
         self.quoteLabel.alpha = 1;

@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="hVB-eo-P29">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -62,6 +63,15 @@
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="★" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rw2-dG-nzq">
+                                <rect key="frame" x="47" y="45" width="38" height="37"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="38" id="o8v-ac-zDS"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="24"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="0.52156862745098043" blue="0.54509803921568623" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -70,6 +80,7 @@
                             <constraint firstAttribute="trailing" secondItem="s0b-Wp-fhc" secondAttribute="trailing" id="5OU-YS-yC4"/>
                             <constraint firstItem="Kbg-2v-d9H" firstAttribute="leading" secondItem="Dg1-7t-VDY" secondAttribute="trailing" constant="8" symbolic="YES" id="7Db-kj-giQ"/>
                             <constraint firstItem="gsj-fu-DP0" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="110" id="7ay-60-kZ0"/>
+                            <constraint firstItem="rw2-dG-nzq" firstAttribute="leading" secondItem="gsj-fu-DP0" secondAttribute="leading" constant="-7" id="LdK-hb-4dP"/>
                             <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="gsj-fu-DP0" secondAttribute="bottom" constant="131" id="LsP-ex-E0w"/>
                             <constraint firstItem="gsj-fu-DP0" firstAttribute="centerX" secondItem="6XJ-4y-BQS" secondAttribute="centerX" id="Nid-YL-7g3"/>
                             <constraint firstItem="6XJ-4y-BQS" firstAttribute="centerX" secondItem="s0b-Wp-fhc" secondAttribute="centerX" id="TXd-4A-4CV"/>
@@ -78,6 +89,8 @@
                             <constraint firstItem="Kbg-2v-d9H" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="27" id="iFW-DD-Maq"/>
                             <constraint firstItem="gsj-fu-DP0" firstAttribute="centerX" secondItem="LVK-Ac-qgV" secondAttribute="centerX" id="pow-Q1-rso"/>
                             <constraint firstItem="LVK-Ac-qgV" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="76" id="sVw-Y6-0xB"/>
+                            <constraint firstItem="rw2-dG-nzq" firstAttribute="baseline" secondItem="Dg1-7t-VDY" secondAttribute="baseline" constant="-3" id="tWs-AY-D3g"/>
+                            <constraint firstItem="rw2-dG-nzq" firstAttribute="firstBaseline" secondItem="Dg1-7t-VDY" secondAttribute="firstBaseline" constant="8" id="wIa-hJ-YlV"/>
                             <constraint firstItem="s0b-Wp-fhc" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="wK7-as-Oau"/>
                             <constraint firstItem="Kbg-2v-d9H" firstAttribute="trailing" secondItem="gsj-fu-DP0" secondAttribute="trailing" constant="13" id="y1A-LD-G1R"/>
                             <constraint firstItem="Dg1-7t-VDY" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="25" id="yWf-wX-gRg"/>
@@ -88,6 +101,7 @@
                     <tabBarItem key="tabBarItem" title="Quote" image="Quote" id="uZp-bF-4Bw"/>
                     <connections>
                         <outlet property="authorLabel" destination="6XJ-4y-BQS" id="qyx-b9-hnk"/>
+                        <outlet property="favoriteLabel" destination="rw2-dG-nzq" id="9OI-sd-g3c"/>
                         <outlet property="quoteLabel" destination="gsj-fu-DP0" id="4PV-46-SaC"/>
                     </connections>
                 </viewController>
@@ -106,7 +120,7 @@
                         <color key="separatorColor" red="1" green="0.52156862749999999" blue="0.5450980392" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="sectionIndexColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="QuoteCell" textLabel="YEh-uV-igb" detailTextLabel="3EZ-wh-t8D" imageView="8am-uh-vIi" rowHeight="105" style="IBUITableViewCellStyleSubtitle" id="Kyy-df-Tjn">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="QuoteCell" textLabel="YEh-uV-igb" detailTextLabel="3EZ-wh-t8D" imageView="8am-uh-vIi" rowHeight="105" style="IBUITableViewCellStyleSubtitle" id="Kyy-df-Tjn">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Kyy-df-Tjn" id="ZJV-5n-8sd">
@@ -278,7 +292,6 @@
         <!--Tab Bar Controller-->
         <scene sceneID="S0d-YX-xy8">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="SS7-ts-FKq" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="hVB-eo-P29" sceneMemberID="viewController">
                     <toolbarItems/>
                     <nil key="simulatedBottomBarMetrics"/>
@@ -297,13 +310,13 @@
                         <segue destination="zQL-bb-3PT" kind="relationship" relationship="viewControllers" id="t58-9g-xLH"/>
                     </connections>
                 </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="SS7-ts-FKq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1240" y="643"/>
         </scene>
         <!--Favorites Table View Controller-->
         <scene sceneID="aqS-TY-Geg">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="EXq-8g-M7J" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController id="1cZ-N8-tnR" customClass="FavoritesTableViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="105" sectionHeaderHeight="22" sectionFooterHeight="22" id="Uik-sV-m0Y">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
@@ -312,7 +325,7 @@
                         <color key="separatorColor" red="1" green="0.52156862749999999" blue="0.5450980392" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="sectionIndexColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="QuoteCell" textLabel="Qnb-El-rGm" detailTextLabel="8OC-jP-MpR" imageView="0j0-8n-Hyj" rowHeight="105" style="IBUITableViewCellStyleSubtitle" id="qFi-cr-W8D">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="QuoteCell" textLabel="Qnb-El-rGm" detailTextLabel="8OC-jP-MpR" imageView="0j0-8n-Hyj" rowHeight="105" style="IBUITableViewCellStyleSubtitle" id="qFi-cr-W8D">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="qFi-cr-W8D" id="0FX-XC-wSe">
@@ -347,6 +360,7 @@
                     <navigationItem key="navigationItem" id="oyi-rM-Bnt"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                 </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="EXq-8g-M7J" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2864" y="1855"/>
         </scene>

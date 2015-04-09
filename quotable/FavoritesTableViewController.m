@@ -53,7 +53,7 @@
     
     static NSString *CellIdentifier = @"QuoteCell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    NSDictionary *quote = [self.quotes quoteAtIndex:[self.quotes favoriteAtIndex:indexPath.row]];
+    NSDictionary *quote = [self.quotes favoriteAtIndex:indexPath.row];
     NSString *quoteText = [quote valueForKey:@"quote"];
     NSString *authorText = [quote valueForKey:@"author"];
     //    NSString *cellText = [[[quoteText stringByAppendingString:@" ("] stringByAppendingString:authorText] stringByAppendingString:@")"];
@@ -63,6 +63,10 @@
     cell.detailTextLabel.text = authorText;
     
     return cell;
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return @"Unfavorite";
 }
 
 
@@ -105,20 +109,6 @@
 
 
 #pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-    InputViewController *inputVC = segue.destinationViewController;
-    inputVC.completionHandler = ^(NSString *quote, NSString *author) {
-        if (quote != nil && author != nil) {
-            NSUInteger index = [self.quotes numberOfQuotes];
-            [self.quotes insertQuote:quote author:author atIndex:index];
-        }
-        [self dismissViewControllerAnimated:YES completion:nil];
-    };
-}
 
 
 @end

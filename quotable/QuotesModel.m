@@ -47,7 +47,7 @@ NSString *const FavoritesPlist = @"favorites.plist";
             [self insertQuote:@"If music be the food of love, play on" author:@"William Shakespeare" atIndex:0];
             [self insertQuote:@"No one can make you feel inferior without your consent" author:@"Eleanor Roosevelt" atIndex:1];
             [self insertQuote:@"You are the music while the music lasts" author:@"T.S. Eliot" atIndex:2];
-            [self insertQuote:@"Be the change you want to see in the world" author:@"Mahatma Gandhi" atIndex:3];
+            [self insertQuote:@"Be the change you wish to see in the world" author:@"Mahatma Gandhi" atIndex:3];
             [self insertQuote:@"Life is about creating yourself" author:@"George Bernard Shaw" atIndex:4];
         }
         if (!self.favorites) {
@@ -82,8 +82,8 @@ NSString *const FavoritesPlist = @"favorites.plist";
 - (void)removeQuoteAtIndex: (NSUInteger)index {
     if ([self numberOfQuotes] == 0) return;
     if (index >= [self numberOfQuotes]) return;
+    [self removeFavorite:[self quoteAtIndex:index]];
     [self.quotes removeObjectAtIndex:index];
-    [self removeFavorite:index];
     [self save];
 }
 
@@ -115,14 +115,10 @@ NSString *const FavoritesPlist = @"favorites.plist";
     return [self.quotes objectAtIndex:self.currentIndex];
 }
 
-- (NSUInteger)indexOfQuote: (NSString*)quote author: (NSString*)author {
+- (void)addFavorite: (NSString*)quote author: (NSString*)author {
     NSDictionary* newQuote = @{@"quote":quote, @"author":author};
-    return [self.quotes indexOfObject:newQuote];
-}
-
-- (void)addFavorite: (NSUInteger)index {
-    if ([self.favorites containsObject:[NSNumber numberWithInteger:index]]) return;
-    [self.favorites addObject:[NSNumber numberWithInteger:index]];
+    if ([self.favorites containsObject:newQuote]) return;
+    [self.favorites addObject:newQuote];
     [self save];
 }
 
@@ -131,9 +127,16 @@ NSString *const FavoritesPlist = @"favorites.plist";
     [self save];
 }
 
-- (void)removeFavorite: (NSUInteger)index {
-    if ([self.favorites containsObject:[NSNumber numberWithInteger:index]])
-        [self.favorites removeObject:[NSNumber numberWithInteger:index]];
+- (void)removeFavorite: (NSString*)quote author: (NSString*)author {
+    NSDictionary* newQuote = @{@"quote":quote, @"author":author};
+    if ([self.favorites containsObject:newQuote])
+        [self.favorites removeObject:newQuote];
+    [self save];
+}
+
+- (void)removeFavorite: (NSDictionary*)quote {
+    if ([self.favorites containsObject:quote])
+        [self.favorites removeObject:quote];
     [self save];
 }
 
@@ -141,10 +144,22 @@ NSString *const FavoritesPlist = @"favorites.plist";
     return [self.favorites count];
 }
 
-- (NSUInteger)favoriteAtIndex: (NSUInteger)index {
-    if ([self numberOfFavorites] == 0) return -1;
-    if (index >= [self numberOfFavorites]) return -1;
-    return [(NSNumber *)[self.favorites objectAtIndex:index] intValue];
+- (NSDictionary*)favoriteAtIndex: (NSUInteger)index {
+    if ([self numberOfFavorites] == 0) return nil;
+    if (index >= [self numberOfFavorites]) return nil;
+    return [self.favorites objectAtIndex:index];
+}
+
+- (BOOL)isFavorite: (NSString*)quote author: (NSString*)author {
+    NSDictionary* newQuote = @{@"quote":quote, @"author":author};
+    if ([self.favorites containsObject:newQuote]) return true;
+    else return false;
+}
+
+- (BOOL)isQuote: (NSString*)quote author: (NSString*)author {
+    NSDictionary* newQuote = @{@"quote":quote, @"author":author};
+    if ([self.quotes containsObject:newQuote]) return true;
+    else return false;
 }
 
 @end

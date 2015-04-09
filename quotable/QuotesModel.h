@@ -24,13 +24,14 @@
 - (void)removeQuoteAtIndex: (NSUInteger)index;
 - (void)insertQuote: (NSString*)quote author: (NSString*)author atIndex: (NSUInteger)index;
 - (void)insertQuote: (NSString*)quote atIndex: (NSUInteger)index;
-- (void)addFavorite: (NSUInteger)index;
-- (void)removeFavoriteAtIndex: (NSUInteger)index;
 - (NSDictionary*)nextQuote;
 - (NSDictionary*)prevQuote;
-- (NSUInteger)indexOfQuote: (NSString*)quote author: (NSString*)author;
 - (NSUInteger)numberOfFavorites;
-- (NSUInteger)favoriteAtIndex: (NSUInteger)index;
-- (void)removeFavorite: (NSUInteger)index;
+- (void)addFavorite: (NSString*)quote author: (NSString*)author;
+- (void)removeFavorite: (NSString*)quote author: (NSString*)author;
+- (void)removeFavoriteAtIndex: (NSUInteger)index;
+- (NSDictionary*)favoriteAtIndex: (NSUInteger)index;
+- (BOOL)isFavorite: (NSString*)quote author: (NSString*)author;
+- (BOOL)isQuote: (NSString*)quote author: (NSString*)author;
 
 @end

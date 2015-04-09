@@ -12,8 +12,10 @@
 @interface ViewController : UIViewController
 
 @property (strong, nonatomic) QuotesModel *quotes;
+@property (nonatomic) BOOL execBegin;
 @property (weak, nonatomic) IBOutlet UILabel *quoteLabel;
 @property (weak, nonatomic) IBOutlet UILabel *authorLabel;
+@property (weak, nonatomic) IBOutlet UILabel *favoriteLabel;
 
 @end
 
