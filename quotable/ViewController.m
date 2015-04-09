@@ -6,12 +6,16 @@
 //  Copyright (c) 2015 Erika Marie Johnson. All rights reserved.
 //
 
+#import <AVFoundation/AVFoundation.h>
+
 #import "ViewController.h"
 
 #define NSLog(FORMAT, ...) printf("%s\n", [[NSString stringWithFormat:FORMAT, ##__VA_ARGS__] UTF8String]);
 
 @interface ViewController ()
-
+{
+    AVAudioPlayer *_audioPlayer;
+}
 @end
 
 @implementation ViewController
@@ -21,6 +25,7 @@
     self.quotes = [QuotesModel sharedModel];
     
     UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(singleTapRecognized:)];
+    singleTap.numberOfTapsRequired = 1;
     [self.view addGestureRecognizer:singleTap];
     
     UISwipeGestureRecognizer *swipeLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeGestureRecognized:)];
@@ -30,6 +35,16 @@
     UISwipeGestureRecognizer *swipeRight = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeGestureRecognized:)];
     swipeRight.direction = UISwipeGestureRecognizerDirectionRight;
     [self.view addGestureRecognizer:swipeRight];
+    
+    UITapGestureRecognizer *doubleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(doubleTapRecognized:)];
+    doubleTap.numberOfTapsRequired = 2;
+    [self.view addGestureRecognizer:doubleTap];
+    
+    [singleTap requireGestureRecognizerToFail: doubleTap];
+    
+    NSString *path = [NSString stringWithFormat:@"%@/tone.mp3", [[NSBundle mainBundle] resourcePath]];
+    NSURL *soundUrl = [NSURL fileURLWithPath:path];
+    _audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:soundUrl error:nil];
     
     NSLog(@"--- BEGIN UNIT TEST ---\n");
     NSLog(@"INSERT QUOTE WITH AUTHOR AT INDEX 0");
@@ -47,12 +62,16 @@
     NSLog(@"GET QUOTE AT INDEX 0: %@", [self.quotes quoteAtIndex:0]);
     NSLog(@"GET QUOTE AT INDEX 1: %@", [self.quotes quoteAtIndex:1]);
     NSLog(@"SUCCESSFULLY INSERTED QUOTE WITH AUTHOR, QUOTE WITHOUT AUTHOR, GOT AND REMOVED BOTH QUOTES");
-    NSLog(@"\n--- END UNIT TEST ---");
+    NSLog(@"\n--- END UNIT TEST ---\n\n");
     
-    [self.quotes insertQuote:@"If music be the food of love, play on" author:@"William Shakespeare" atIndex:0];
-    [self.quotes insertQuote:@"No one can make you feel inferior without your consent" author:@"Eleanor Roosevelt" atIndex:1];
-    [self.quotes insertQuote:@"You are the music while the music lasts" author:@"T.S. Eliot" atIndex:2];
-    [self.quotes insertQuote:@"Be the change you want to see in the world" author:@"Mahatma Gandhi" atIndex:3];
+    NSLog(@"Documents Directory: %@", [[[NSFileManager
+                                         defaultManager] URLsForDirectory:NSDocumentDirectory
+                                        inDomains:NSUserDomainMask] lastObject]);
+    
+}
+
+-(void)viewDidAppear:(BOOL)animated {
+    [self becomeFirstResponder];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -60,29 +79,51 @@
 }
 
 - (void)singleTapRecognized: (UITapGestureRecognizer *) recognizer {
+    [_audioPlayer play];
     self.quoteLabel.alpha = 0;
     self.authorLabel.alpha = 0;
     NSDictionary *quote = [self.quotes randomQuote];
-    self.quoteLabel.text = [quote valueForKey:@"quote"];
-    self.authorLabel.text = [quote valueForKey:@"author"];
+    if (!quote) {
+        self.quoteLabel.text = @"No quotes to show";
+        self.authorLabel.text = @":(";
+    } else {
+        self.quoteLabel.text = [quote valueForKey:@"quote"];
+        self.authorLabel.text = [quote valueForKey:@"author"];
+    }
     [UIView animateWithDuration:1.0 animations:^{
         self.quoteLabel.alpha = 1;
         self.authorLabel.alpha = 1;
     }];
 }
 
+- (void)doubleTapRecognized:(UITapGestureRecognizer *) recognizer {
+    NSUInteger favoriteIndex = [self.quotes indexOfQuote:self.quoteLabel.text author:self.authorLabel.text];
+    [self.quotes addFavorite:favoriteIndex];
+}
+
 - (void)swipeGestureRecognized: (UISwipeGestureRecognizer *) recognizer {
+    [_audioPlayer play];
     self.quoteLabel.alpha = 0;
     self.authorLabel.alpha = 0;
     if (recognizer.direction == UISwipeGestureRecognizerDirectionLeft) {
         NSDictionary *quote = [self.quotes nextQuote];
-        self.quoteLabel.text = [quote valueForKey:@"quote"];
-        self.authorLabel.text = [quote valueForKey:@"author"];
+        if (!quote) {
+            self.quoteLabel.text = @"No quotes to show";
+            self.authorLabel.text = @":(";
+        } else {
+            self.quoteLabel.text = [quote valueForKey:@"quote"];
+            self.authorLabel.text = [quote valueForKey:@"author"];
+        }
     }
     if (recognizer.direction == UISwipeGestureRecognizerDirectionRight) {
         NSDictionary *quote = [self.quotes prevQuote];
-        self.quoteLabel.text = [quote valueForKey:@"quote"];
-        self.authorLabel.text = [quote valueForKey:@"author"];
+        if (!quote) {
+            self.quoteLabel.text = @"No quotes to show";
+            self.authorLabel.text = @":(";
+        } else {
+            self.quoteLabel.text = [quote valueForKey:@"quote"];
+            self.authorLabel.text = [quote valueForKey:@"author"];
+        }
     }
     [UIView animateWithDuration:1.0 animations:^{
         self.quoteLabel.alpha = 1;
@@ -94,20 +135,30 @@
     return YES;
 }
 
-- (void)viewDidAppear: (BOOL)animated {
-    [self becomeFirstResponder];
-}
-
 - (void)motionEnded: (UIEventSubtype) motion withEvent: (UIEvent*) event {
+    [_audioPlayer play];
     self.quoteLabel.alpha = 0;
     self.authorLabel.alpha = 0;
     NSDictionary *quote = [self.quotes randomQuote];
-    self.quoteLabel.text = [quote valueForKey:@"quote"];
-    self.authorLabel.text = [quote valueForKey:@"author"];
+    if (!quote) {
+        self.quoteLabel.text = @"No quotes to show";
+        self.authorLabel.text = @":(";
+    } else {
+        self.quoteLabel.text = [quote valueForKey:@"quote"];
+        self.authorLabel.text = [quote valueForKey:@"author"];
+    }
     [UIView animateWithDuration:1.0 animations:^{
         self.quoteLabel.alpha = 1;
         self.authorLabel.alpha = 1;
     }];
+}
+
+- (IBAction)soundSwitchChanged:(id)sender {
+    if([sender isOn]){
+        _audioPlayer.volume = 1.0;
+    } else{
+        _audioPlayer.volume = 0.0;
+    }
 }
 
 @end

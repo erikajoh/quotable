@@ -11,7 +11,10 @@
 @interface QuotesModel : NSObject
 
 @property (strong, nonatomic) NSMutableArray *quotes;
+@property (strong, nonatomic) NSMutableArray *favorites;
 @property (nonatomic) NSUInteger currentIndex;
+@property (strong, nonatomic) NSString *quotesPath;
+@property (strong, nonatomic) NSString *favoritesPath;
 
 + (instancetype) sharedModel;
 
@@ -21,7 +24,13 @@
 - (void)removeQuoteAtIndex: (NSUInteger)index;
 - (void)insertQuote: (NSString*)quote author: (NSString*)author atIndex: (NSUInteger)index;
 - (void)insertQuote: (NSString*)quote atIndex: (NSUInteger)index;
+- (void)addFavorite: (NSUInteger)index;
+- (void)removeFavoriteAtIndex: (NSUInteger)index;
 - (NSDictionary*)nextQuote;
 - (NSDictionary*)prevQuote;
+- (NSUInteger)indexOfQuote: (NSString*)quote author: (NSString*)author;
+- (NSUInteger)numberOfFavorites;
+- (NSUInteger)favoriteAtIndex: (NSUInteger)index;
+- (void)removeFavorite: (NSUInteger)index;
 
 @end

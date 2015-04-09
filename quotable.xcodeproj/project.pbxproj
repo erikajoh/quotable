@@ -17,6 +17,9 @@
 		5B1725251A9E6AF100E97049 /* QuotesModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B1725241A9E6AF100E97049 /* QuotesModel.m */; };
 		5B4E0E181ABBCEFE00D2992F /* QuotesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B4E0E171ABBCEFE00D2992F /* QuotesTableViewController.m */; };
 		5B4E0E241ABBF6DA00D2992F /* InputViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B4E0E231ABBF6DA00D2992F /* InputViewController.m */; };
+		5BF63A591AD6244E00FBF752 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BF63A581AD6244E00FBF752 /* AVFoundation.framework */; };
+		5BF63A5B1AD624DD00FBF752 /* tone.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5BF63A5A1AD624DD00FBF752 /* tone.mp3 */; };
+		5BF63A631AD62EA600FBF752 /* FavoritesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BF63A621AD62EA600FBF752 /* FavoritesTableViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +52,11 @@
 		5B4E0E171ABBCEFE00D2992F /* QuotesTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuotesTableViewController.m; sourceTree = "<group>"; };
 		5B4E0E221ABBF6DA00D2992F /* InputViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InputViewController.h; sourceTree = "<group>"; };
 		5B4E0E231ABBF6DA00D2992F /* InputViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InputViewController.m; sourceTree = "<group>"; };
+		5BF63A561AD61CF700FBF752 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		5BF63A581AD6244E00FBF752 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		5BF63A5A1AD624DD00FBF752 /* tone.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = tone.mp3; path = ../../../../../../../../Downloads/tone.mp3; sourceTree = "<group>"; };
+		5BF63A611AD62EA600FBF752 /* FavoritesTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FavoritesTableViewController.h; sourceTree = "<group>"; };
+		5BF63A621AD62EA600FBF752 /* FavoritesTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FavoritesTableViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +64,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5BF63A591AD6244E00FBF752 /* AVFoundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -72,6 +81,8 @@
 		5B1724F11A9E699900E97049 = {
 			isa = PBXGroup;
 			children = (
+				5BF63A581AD6244E00FBF752 /* AVFoundation.framework */,
+				5BF63A561AD61CF700FBF752 /* AudioToolbox.framework */,
 				5B1724FC1A9E699900E97049 /* quotable */,
 				5B1725161A9E699900E97049 /* quotableTests */,
 				5B1724FB1A9E699900E97049 /* Products */,
@@ -90,6 +101,7 @@
 		5B1724FC1A9E699900E97049 /* quotable */ = {
 			isa = PBXGroup;
 			children = (
+				5BF63A5A1AD624DD00FBF752 /* tone.mp3 */,
 				5B1725011A9E699900E97049 /* AppDelegate.h */,
 				5B1725021A9E699900E97049 /* AppDelegate.m */,
 				5B1725041A9E699900E97049 /* ViewController.h */,
@@ -104,6 +116,8 @@
 				5B4E0E171ABBCEFE00D2992F /* QuotesTableViewController.m */,
 				5B4E0E221ABBF6DA00D2992F /* InputViewController.h */,
 				5B4E0E231ABBF6DA00D2992F /* InputViewController.m */,
+				5BF63A611AD62EA600FBF752 /* FavoritesTableViewController.h */,
+				5BF63A621AD62EA600FBF752 /* FavoritesTableViewController.m */,
 			);
 			path = quotable;
 			sourceTree = "<group>";
@@ -214,6 +228,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5BF63A5B1AD624DD00FBF752 /* tone.mp3 in Resources */,
 				5B1725091A9E699900E97049 /* Main.storyboard in Resources */,
 				5B17250E1A9E699900E97049 /* LaunchScreen.xib in Resources */,
 				5B17250B1A9E699900E97049 /* Images.xcassets in Resources */,
@@ -238,6 +253,7 @@
 				5B4E0E241ABBF6DA00D2992F /* InputViewController.m in Sources */,
 				5B1725031A9E699900E97049 /* AppDelegate.m in Sources */,
 				5B1725251A9E6AF100E97049 /* QuotesModel.m in Sources */,
+				5BF63A631AD62EA600FBF752 /* FavoritesTableViewController.m in Sources */,
 				5B1725001A9E699900E97049 /* main.m in Sources */,
 				5B4E0E181ABBCEFE00D2992F /* QuotesTableViewController.m in Sources */,
 			);
